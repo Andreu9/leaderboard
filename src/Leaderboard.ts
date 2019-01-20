@@ -54,7 +54,7 @@ export class Leaderboard {
         delete row.score;
 
         const update: any = {
-            $max: { score: score },
+            $inc: { score: score },
             $setOnInsert: { createdAt: new Date() },
         };
 
@@ -69,7 +69,7 @@ export class Leaderboard {
         });
     }
 
-    public list(leaderboardId: string, opts: ListOptions = { limit: 10 }) {
+    public list(leaderboardId: string, opts: ListOptions = { limit: 0 }) {
         return this.getCollection(leaderboardId).
             find({}).
             project({ _id: 0 }).
